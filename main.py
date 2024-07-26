@@ -1,6 +1,7 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 from pydantic import BaseModel, EmailStr
+from typing import Annotated
 
 app = FastAPI()
 
@@ -25,6 +26,11 @@ def create_user(user: CreateUser):
     return {'message': 'User was created',
             'email': user.email
             }
+
+
+@app.get('/users/{user_id}')
+def get_user(user_id: Annotated[int, Path(ge=1, le=1000000)]):
+    return f'User has id: {user_id}'
 
 
 if __name__ == '__main__':
