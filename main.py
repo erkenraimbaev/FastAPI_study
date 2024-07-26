@@ -1,8 +1,12 @@
 import uvicorn
 from fastapi import FastAPI
-from pydantic import EmailStr
+from pydantic import BaseModel, EmailStr
 
 app = FastAPI()
+
+
+class CreateUser(BaseModel):
+    email: EmailStr
 
 
 @app.get('/')
@@ -17,8 +21,10 @@ def read_name_and_print_hello(name: str):
 
 
 @app.post('/users/create/')
-def create_user(email: EmailStr):
-    return {'message': 'User was create'}
+def create_user(user: CreateUser):
+    return {'message': 'User was created',
+            'email': user.email
+            }
 
 
 if __name__ == '__main__':
