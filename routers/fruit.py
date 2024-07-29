@@ -1,16 +1,16 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Path
+from sqlalchemy.sql import crud
 
-from users.schemas import CreateUser
+from schemas.fruit import FruitCreate
 
-from users import crud
 
-router = APIRouter(prefix='/users', tags=['users'])
+router = APIRouter(prefix='/fruits', tags=['fruits'])
 
 
 @router.post('/create/')
-def create_user(user: CreateUser):
+def create_user(user: FruitCreate):
     return crud.create_user(user_in=user)
 
 
