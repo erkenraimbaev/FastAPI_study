@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, Result
-from products.schemas import Fruit, FruitCreate
+from schemas.fruit import Fruit, FruitCreate
 
 
 async def get_fruits(session: AsyncSession) -> list[Fruit]:
